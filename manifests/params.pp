@@ -10,6 +10,10 @@ class java::params {
       default => "/usr/lib/jvm",
    }
 
+   $download_url = $::hostname ? {
+      default => "http://download.oracle.com/otn-pub/java/jdk/7u51-b13/jdk-7u51-linux-x64.tar.gz",
+   }
+
    $java_home = $::hostname ? {
       default => "/usr/lib/jvm/jdk1.7.0_51",
    }
@@ -19,7 +23,7 @@ class java::params {
    }
 
    $tmp_directory = $::hostname ? {
-      default => "/tmp",
+      default => "/opt",
    }
   
    $owner = $::hostname ? {

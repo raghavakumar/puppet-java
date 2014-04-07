@@ -10,25 +10,25 @@ class java
     path => [ "/usr/bin", "/bin", "/usr/sbin" ]
   }
 
-  file { "${java::params::tmp_directory}/${java::params::java_archive}" :
-         ensure => "present",
-	 source => "puppet:///modules/java/${java::params::java_archive}",
-	 owner => "${java::params::owner}",
-	 mode => 755
-       }
+  exec { "download_jdk":
+         cwd =>"${java::params::tmp_directory}",
+         command => "curl -L -C - -b 'oraclelicense=accept-securebackup-cookie' -O ${java::params::download_url}",
+         creates => "${java::params::tmp_directory}/${java::params::java_archive}",
+         alias => "download_jdk",
+       }  
 
-  exec { "extracti_jdk":
+  exec { "extract_jdk":
          cwd => "${java::params::tmp_directory}",
  	 command => "tar xfv ${java::params::java_archive}",
 	 creates => "${java::params::java_home}",
          alias => "extract_jdk",
-	 require => File["${java::params::tmp_directory}/${java::params::java_archive}"],
+	 require => Exec["download_jdk"],
        }
 
   file { "${java::params::java_base_path}":
          ensure => directory,
 	 owner => "${java::params::owner}",
-	 require => Exec['extract_jdk']
+	 require => Exec["extract_jdk"]
        }
 
   exec { "move_jdk":
