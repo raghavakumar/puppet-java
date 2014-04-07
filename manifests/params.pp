@@ -4,7 +4,7 @@ class java::params {
 
 
 	$java_archive = $::hostname ? {		
-		default	=> "jdk-7u51-linux-i586.tar.gz",
+		default	=> "jdk-7u51-linux-x64.tar.gz",
 	}
 
   $java_base_path = $::hostname ? {

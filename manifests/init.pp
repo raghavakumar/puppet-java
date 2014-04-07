@@ -40,7 +40,7 @@ class java
   exec {'install java':
      require   => Exec['move jdk'],
      logoutput => true,
-     command   => "update-alternatives --install /bin/java java ${java::params::java_home}/bin/java 1"
+     command   => "update-alternatives --install /usr/bin/java java ${java::params::java_home}/bin/java 1"
   }
 
   exec {'set java':
@@ -52,7 +52,7 @@ class java
   exec {'install javac':
       require   => Exec['move jdk'],
       logoutput => true,
-      command   => "update-alternatives --install /bin/javac javac ${java::params::java_home}/bin/javac 1"
+      command   => "update-alternatives --install /usr/bin/javac javac ${java::params::java_home}/bin/javac 1"
   }
 
   exec {'set javac':
