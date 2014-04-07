@@ -13,11 +13,13 @@ include jdk
 
 Configuration:
 
-A tar.gz file needs to be placed into ~/modules/java/files.
+"$download_url" param in "params.pp" was configured to fetch "jdk1.7.0_51" JDK version from oracle.com site. If required, Please modify the url to required version.
 
-Once downloaded the params.pp file needs to be updated with the version downloaded.
+If above $download_url modified, then below 3 variables to be modified accordingly.
 
-For ex: "params.pp" file was tested with "jdk-7u51-linux-x64.tar.gz". This tar.gz was downloaded manually from "http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html" and placed in "files" subfolder.
+$java_archive
+$java_home
+$java_folder
 
 
 Support:
